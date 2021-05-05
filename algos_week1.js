@@ -219,17 +219,57 @@ console.log(insertionSort(nums1))
     Space: O(n) linear
 */
 function merge(nums1, nums2){
+    let returnArr = [];
+    let maxLength = nums1.length;
+    if (nums2.length > maxLength) maxLength = nums2.length;
 
+    for (let i = 0; i < maxLength * 2; i++){
+        if (nums1[0] == nums2[0]){
+            returnArr.push(nums1[0]);
+            returnArr.push(nums2[0]);
+            nums1 = nums1.slice(1);
+            nums2 = nums2.slice(1);
+        }
+        else if (nums1[0] < nums2[0]){
+            returnArr.push(nums1[0]);
+            nums1 = nums1.slice(1);
+        }
+        else {
+            returnArr.push(nums2[0]);
+            nums2 = nums2.slice(1);
+        }
+    }
+    return returnArr
 }
+
+var nums1 = [1,2,6,9]
+var nums2 = [3,4,7,10]
+console.log(merge(nums1,nums2))
 
 /*
         2. create mergeSort function to sort the provided array
 */
-function mergeSort(nums){
 
+// Recursive
+function mergeSort(nums){
+    if(nums.length == 1) {
+        return nums
+    } else {
+        let left = nums.slice(0,Math.floor(nums.length/2));
+        let right = nums.slice(Math.floor(nums.length/2));
+        //console.log(left);
+        //console.log(right);
+        return merge(mergeSort(left), mergeSort(right))
+    }
 }
 
-// // Recursion sample: 
+var nums = [5,2,3,7]
+console.log(mergeSort(nums))
+
+// Non-Recursive
+function mergeSort(nums){
+}
+
 
 // **********************************************************************
 // Thursday
