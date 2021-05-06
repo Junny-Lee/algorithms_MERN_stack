@@ -340,7 +340,50 @@ function mergeSort(nums){
 // **********************************************************************
 // Thursday
 
+/* 
+    Params: nums, left, right
+        - left and right are indexes, for now, left will be 0, and right will be
+            the last idx.
+        - later these params will be used to specify a sub section of the array to
+            partition.
+    Steps:
+    1. Pick an number out of the arr to be your pivot value
+        - usually the middle idx but can be any.
+    2. Partition the array IN PLACE such that all values less than the pivot
+        value are to the left of it and all values greater than the pivot value
+        are to the right (not perfectly sorted).
+    3. return: the index where the left section of smaller items ends.
+    "Choosing a random pivot minimizes the chance that you will encounter
+    worst-case O(n^2) performance (always choosing first or last would cause
+    worst-case performance for nearly-sorted or nearly-reverse-sorted data).
+    Choosing the middle element would also be acceptable in the majority of
+    cases."
+    https://stackoverflow.com/questions/164163/quicksort-choosing-the-pivot
+*/
+function partition(nums = [], left = 0, right = nums.length-1) {
+    let middleIdx = Math.floor(nums.length/2);
+    console.log(middleIdx)
+    let pivotNum = nums[middleIdx];
+    console.log(pivotNum)
+    for (let i = 0; i < nums.length; i++){
+        if (nums[0] > pivotNum){
+            let biggerNum = nums.shift();
+            nums.push(biggerNum);
+            middleIdx--;
+            console.log("decreased middle idx: ", middleIdx);
+            i--;
+        }
+        else {
+            let smallerOrEqualNum = nums[0];
+            nums[0] = nums[middleIdx - 1];
+            nums[middleIdx - 1] = smallerOrEqualNum;
+        }
+    }
+    return nums
+}
 
+var nums1 = [3,1,5,2,3,7,1]
+console.log(partition(nums1))
 
 // **********************************************************************
 // Friday
