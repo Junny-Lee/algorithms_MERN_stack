@@ -246,11 +246,63 @@ var nums1 = [1,2,6,9]
 var nums2 = [3,4,7,10]
 console.log(merge(nums1,nums2))
 
+// dana's group's solution
+function merge(left, right){
+    let arr = [];
+    // stop when any of the arrays are empty
+    while (left.length && right.length){
+        // choose the smaller of the smaller elements of left and right 
+        // push it into the sorted array
+        // remove the element from the array with shift()
+        // shift() removes the first element from an array and returns it
+        if (left[0] < right[0]){
+            arr.push(left.shift());
+        }
+        else {
+            arr.push(right.shift());
+        }
+    }
+    // in case there are elements left in the left or right array
+    // push them into the sorted array, since those elements are already sorted 
+    return [...arr, ...left, ...right]
+}
+
+// cody's solution
+function merge(left, right){
+    const result = [];
+    let iLeft = 0, iRight = 0;
+
+    while (iLeft < left.length && iRight < right.length){
+        if (left[iLeft] < right[iRight]){
+            result.push(Left[iLeft]);
+            iLeft++;
+        }
+        else if (left[iLeft] > right[iRight]){
+            result.push(right[iRight]);
+            iRight++;
+        }
+        else {
+            result.push(left[iLeft], right[iRight]);
+            iLeft++;
+            iRight++;
+        }
+    }
+    while (iLeft < left.length){
+        result.push(left[iLeft]);
+        iLeft++;
+    }
+    while (right < right.length){
+        result.push(right[iRight]);
+        iRight++;
+    }
+    return results
+}
+
 /*
         2. create mergeSort function to sort the provided array
 */
 
-// Recursive
+// Our attempt at recursive: supposedly the same as dana's but doen't work for our test case.
 function mergeSort(nums){
     if(nums.length == 1) {
         return nums
@@ -261,6 +313,20 @@ function mergeSort(nums){
         //console.log(right);
         return merge(mergeSort(left), mergeSort(right))
     }
+}
+
+// dana's group that works:
+function mergeSort(nums) {
+    // base case 
+    if (nums.length < 2){
+        return nums 
+    }
+    // find the midpoint in the original array
+    let middle = Math.floor(nums.length / 2);
+    // split the original array into two arrays using splice 
+    let left = nums.splice(0, middle);
+    //recursive call on the two new arrays
+    return merge(mergeSort(left),mergeSort(nums))
 }
 
 var nums = [5,2,3,7]
