@@ -388,3 +388,85 @@ console.log(partition(nums1))
 // **********************************************************************
 // Friday
 
+/* 
+    Visualization:
+    https://www.hackerearth.com/practice/algorithms/sorting/quick-sort/visualize/
+    Create a function that uses yesterday’s partition to fully sort an array
+    in-place.
+    Unstable sort.
+    
+    Time Complexity
+        - Best: O(n log(n)) linearithmic.
+        - Average: O(n log(n)) linearithmic.
+        - Worst: O(n^2) quadratic.
+    
+    Space: O(1) constant.
+    Params: nums, left, right
+    - left and right are indexes, for now, left will be 0, and right will be the
+        last idx.
+    - later these params will be used to specify a sub section of the array to
+        partition.
+    Steps:
+        - start by partitioning the full array
+            (use the previously built partition algo).
+        - then partition the left side of the array
+            (left of the returned partition idx) and the right side
+            (right of the returned partition idx), recursively.
+*/
+function partition(nums = [], left = 0, right = nums.length - 1) {
+    if(left === right){
+        return left;
+    }
+
+    const pivotVal = nums[right]; // 5
+
+    let newPIdx = left; // 0
+
+    for(let i = left; i < right; i++) { // i = 0; i < 5; i++
+        if(nums[i] <= pivotVal) { // 
+            [nums[newPIdx], nums[i]] = [nums[i], nums[newPIdx]]; // [5,2,4,6,7,1];
+            newPIdx++; // 1
+        }
+    }
+
+    [nums[newPIdx], nums[right]] = [nums[right], nums[newPIdx]]; //[5,1] = [1,5]
+    return newPIdx; // 0
+}
+
+function quickSort(nums = [], left = 0, right = nums.length-1){
+    // base case
+    if (nums.length == 1) return nums
+
+    // forward progress
+    partition(nums, left, right) // [1,2,4,6,7,5];
+    left++;
+    right--;
+
+    // recursive call 
+    quickSort(nums, left, right)
+}
+
+var nums1 = [5,1,4,6,7,2];
+console.log(quickSort(nums1, 0, nums1.length-1))
+
+
+function quickSort(nums = [], left = 0, right = nums.length-1){
+    // base case
+
+    // forward progress
+    // move left bound to the right until it reaches a value greater than or equal to the pivot 
+    while(nums[left] <= pivotVal){
+        left++;
+    }
+    // Move the right bound to the left until it crosses the left bound or finds a value less than the pivot.
+    while(nums[right] >= pivotVal || right == left){
+        right--;
+    }
+    // swap the selected values
+    let temp = nums[left];
+    nums[left] = nums[right];
+    nums[right] = temp;
+
+    // recursive call 
+    quickSort(nums, left, right)
+}
