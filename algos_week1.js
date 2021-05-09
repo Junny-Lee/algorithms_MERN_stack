@@ -470,3 +470,25 @@ function quickSort(nums = [], left = 0, right = nums.length-1){
     // recursive call 
     quickSort(nums, left, right)
 }
+
+// cody's solution 
+function quickSort(nums = [], left = 0, right = nums.length-1){
+    // Base case: Are our left and right indices valid
+    // aka: is left actually to the left of right.
+    // remember, a single element is always sorted
+    if(left >= right) {
+        return nums;
+    }
+
+    // partition this section of the array and return the pivot index
+    const pivot = partition(nums, left, right);
+    
+    // now, call quickSort on the left side (from left to pivot - 1 since pivot is in the right place)
+    quickSort(nums, left, pivot-1);
+    // and call it on the right side (from pivot + 1 to right since pivot is in the right place)
+    // and return it
+    return quickSort(nums, pivot + 1, right);
+}
+
+
+console.log(quickSort([1,9,3,2,7,14,8]))
