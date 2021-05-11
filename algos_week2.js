@@ -6,6 +6,7 @@
     Venn Diagram Visualization (bottom) https://i.ytimg.com/vi/sdflTUW6gHo/maxresdefault.jpg
 */
 
+// cody's solution
 function orderedIntersection(sortedA, sortedB){
     // iterating through the two arrays
     let i = 0;
@@ -36,6 +37,26 @@ function orderedIntersection(sortedA, sortedB){
         }
     }
     return intersection
+}
+
+// my solution
+function orderedIntersection(sortedA, sortedB){
+    let returnArr = [];
+    if (sortedA.length > sortedB.length){ // A is longer
+        for (let i = 0; i < sortedA.length; i++){
+            if ( ( sortedB.indexOf(sortedA[i]) != -1 ) && ( sortedA[i] != returnArr[returnArr.length - 1] ) ){
+                returnArr.push(sortedA[i]);
+            }
+        }
+    }
+    else {
+        for (let i = 0; i < sortedB.length; i++){
+            if ( ( sortedA.indexOf(sortedB[i]) != -1 ) && ( sortedB[i] != returnArr[returnArr.length - 1] ) ){
+                returnArr.push(sortedB[i]);
+            }
+        }
+    }
+    return returnArr
 }
 
 
