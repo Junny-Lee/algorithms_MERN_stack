@@ -340,7 +340,7 @@ let setB = [1,2,3,5,5,2];
 console.log(symmetricDifference(setA, setB))
 
 
-// ****************************************************s
+// ****************************************************
 // Thursday
 /* 
     Given an array of ints, find all the non-consecutive integers
@@ -365,6 +365,19 @@ function allNonConsecutive(sortedNums){
         }
     }
     return returnArr;
+}
+
+// cody's solution:
+function allNonConsecutive(sortedNums){
+    const nonConsec = []; // output array
+
+    for(var i = 1; i < sortedNums.length; i++) { // since the value at index 0 is ignored, we'll start at index 1
+        if(sortedNums[i] !== sortedNums[i-1] + 1) { // at each index, check to see if the value is not the previous value + 1
+            nonConsec.push({ i: i, n: sortedNums[i] }); // if it's not, push the object with the index and number into the output array
+        }
+    }
+
+    return nonConsec; // and finally, after checking each value, return the nonConsec array
 }
 
 let sortedNums = [1,2,3,4,6,7,8,10];
@@ -425,6 +438,30 @@ function findConsqSums(nums, t){
     return ret;
 }
 
+// cody's solution:
+function findConsqSums(nums, targetSum){
+    const conSum = [];
+
+    // there's no easy way about this. we need to check consecutive sums for each and every value
+    for(var i = 0; i < nums.length; i++){
+        let cSum = nums[i]; // to avoid continously looping through an array and calculating a sum, we'll store a sum. we'll start our sum as the current value
+        let cNums = [nums[i]]; // since we want an array with the numbers that add up to the sum, we'll make an array, and store the current value
+        let cI = i+1; // we need another index for the consecutive set of numbers
+
+        while(cSum < sum && cI < nums.length){ // we want to keep checking next numbers until either our cSum isn't less than the target sum anymore, and while cI is still within the array
+            cSum += nums[cI]; // add the value to our sum
+            cNums.push(nums[cI]); // and add it to our array
+            cI++; // and increment cI
+        }
+
+        if(cSum === sum) { // now that we're out of the while loop, let's check if it broke because the cSum is GREATER than our target, or cI just went outside the bounds of the array
+            conSum.push(cNums); // if it's because cSum IS the target sum, add it the list of consecutive sum sets
+        }
+    }
+
+    return conSum; // and return the set of consecutive numbers
+}
+
 let nums = [2, 5, 3, 6, 7, 23, 12] ;
 let targetSum = 16;
 let expected = 
@@ -435,3 +472,80 @@ let expected =
 // because 2 + 5 + 3 + 6 = 16, and those numbers are all consecutive, and 3 + 6 + 7 = 16, 
 // and those numbers are also all consecutive
 console.log(findConsqSums(nums, targetSum))
+
+// ****************************************************
+// Friday
+/* 
+Given an unsorted non-empty array of integers and int k, return the k most frequent elements (in any order)
+You can assume there is always a valid solution
+These example inputs are sorted for readability, but the input is NOT guaranteed to be sorted and the output does NOT need to be in any specific order
+Hard Bonus: make it O(n) time
+*/
+
+// Trey's solution
+function kMostFrequent(nums, k) {
+    let dict = {};
+    for (let i = 0; i < nums.length; i++){
+        if (nums[i] in dict){
+            dict[nums[i]] += 1;
+        } else {
+            dict[nums[i]] = 1;
+        }
+    }
+    let kArray = [];
+    for (i = 1 ; i <= k; i++){
+        let max = 0;
+        let dictKey;
+        for (key in dict){
+            if (dict[key] > max){
+                max = dict[key];
+                dictKey = key;
+            }
+        }
+        kArray.push(dictKey);
+        delete dict[dictKey];
+    }
+    return kArray;
+}
+
+const nums1 = [1, 1, 1, 2, 2, 3];
+const k1 = 2;
+const expected1 = [1, 2];
+console.log(kMostFrequent(nums1, k1))
+// Explanation: return the two most frequent elements, 1 and 2 are the two most frequent elements
+
+const nums2 = [0, 0, 0, 2, 2, 3];
+const k2 = 1;
+const expected2 = [0];
+console.log(kMostFrequent(nums2, k2))
+// Explanation: k being 1 means return the single most frequent element
+
+const nums3 = [1, 1, 2, 2, 3, 3];
+const k3 = 3;
+const expected3 = [1, 2, 3];
+console.log(kMostFrequent(nums3, k3))
+
+/*
+Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+Bonus: Make it O(n) time
+*/
+
+function twoSum(nums, targetSum) {
+    let returnArr = [];
+
+    for (let i = 0; i < nums.length; i++){
+        for (let j = i + 1; j < nums.length; j++){
+            if (nums[i] + nums[j] == targetSum){
+                returnArr.push(i);
+                returnArr.push(j);
+            }
+        }
+    }
+    return returnArr;
+}
+
+const nums1 = [2, 11, 7, 15];
+const targetSum1 = 9;
+console.log(twoSum(nums1, targetSum1))
+
