@@ -6,8 +6,6 @@
     Venn Diagram Visualization (bottom) https://i.ytimg.com/vi/sdflTUW6gHo/maxresdefault.jpg
 */
 
-import { object } from "prop-types";
-
 // cody's solution
 function orderedIntersection(sortedA, sortedB){
     // iterating through the two arrays
@@ -543,6 +541,17 @@ function twoSum(nums, targetSum) {
         }
     }
     return returnArr;
+}
+
+// someone else's 
+function twoSum(nums, targetSum) {
+    for (let i = 0; i < nums.length; i++){
+        let j = i+1;
+        while (j < nums.length) {
+            if (nums[i] + nums[j] == targetSum) return [i,j];
+            else j++;
+        }
+    }
 }
 
 const nums1 = [2, 11, 7, 15];
