@@ -282,7 +282,8 @@ function findByIdAndUpdate(id, updatedVals, collection) {
     Bonus: allow the search method to be provided as a parameter, e.g., string methods: includes, startsWith, endsWith
         - you can assume the searchMethod will be valid
 */
-// EXAMPLE:
+
+// my solution:
 function filterByKey(items, searchFor, searchBy){
     let returnArr = [];
     for (let i = 0; i < items.length; i++){
@@ -343,3 +344,93 @@ const expectedBonus = [
 function filterByKeyBonus3(items, searchFor, searchBy, searchMethod){
 
 }
+
+
+// ******************************************************************
+// Thursday
+/* 
+    Create a function to determine the max amount of
+    servings that can be made based on a recipe and
+    available ingredients.
+    Input:
+        - recipe object where keys are ingredient names
+        and values are unit required (int)
+        - available ingredients object where keys are ingredient
+        names and values are unit available (int)
+    Output:
+        int (max servings)
+    Side note (not needed for solution): Realistically, the values
+    would be an object as well with the keys: unit (unit of measure), and amount.
+    If the available ingredient was stored in a different unit,
+    a conversion table would be needed to convert units of measure.
+*/
+            // updatedAvailable.push(available[key])
+            // updatedAvailable.push(key, available[key])
+            // objectToAdd = {
+            //     key : available[key]
+            // }
+            // updatedAvailable = {...updatedAvailable, objectToAdd}
+
+// my solution only works if the available ingredients are in the same order as the recipe
+function getMaxServings(recipe, available){
+    let getMaxServings = 0;
+    let keyArr = [];
+    let valueArr = [];
+    for (key in available){
+        if (recipe.hasOwnProperty(key)){
+            keyArr.push(key)
+            valueArr.push(available[key])
+        }
+    }
+    let i = 0;
+    for (key in recipe){
+        if ( i == 0 ) getMaxServings = Math.floor(valueArr[i] / recipe[key])
+        else {
+            if (Math.floor(valueArr[i] / recipe[key]) < getMaxServings) getMaxServings = Math.floor(valueArr[i] / recipe[key])
+        }
+        i++;
+    }
+    return getMaxServings
+}
+
+// reid's solution
+function getMaxServings(recipe, available){
+    let maxForRecipe = 0;
+    for (item in recipe) {
+        let availableQuantity = available[item];
+        let maxServings = Math.floor(availableQuantity/recipe[item]);
+        // at any point, an item is not available, we stop
+        if (isNaN(maxServings)){
+            return 0;
+        }
+        // we only care about the min number of 'max' servings
+        if (maxServings<maxForRecipe || maxForRecipe === 0){
+            maxForRecipe = maxServings;
+        }
+    }
+    return maxForRecipe;
+}
+
+const recipe1 = {
+    "organic fat": 99,
+    "live squid": 1,
+    "birds nest": 1,
+    "fried flesh": 1,
+    spicy: 5,
+    "gourmet memes": 4200,
+};
+
+const available1 = {
+    "organic fat": 990,
+    "live squid": 1,
+    "birds nest": 10,
+    "fried flesh": 10,
+    spicy: 50,
+    "gourmet memes": 42000,
+    sugar: 9001,
+    spice: 5,
+    "everything nice": 1,
+    "triple point water": 5,
+};
+console.log(getMaxServings(recipe1, available1))
+
