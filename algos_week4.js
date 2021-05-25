@@ -19,7 +19,14 @@ function dropIt(arr, callback){
     return returnArr;
 }
 
-
+// reid's solution 
+function dropIt(arr, callback){
+    let i = 0;
+    while (!callback(arr[i])&& (i<arr.length)){
+        i++
+    }
+    return arr.splice(i);
+}
 
 const nums1 = [1, 4, 3, 6, 9, 3];
 const callback1 = (elem) => {
