@@ -1,3 +1,4 @@
+//  Monday
 /*
     Input: arr, callback
     Output: arr (with elements removed)
@@ -46,3 +47,55 @@ const nums3 = [1, 4, 3, 6, 9, 3];
 const callback3 = (elem) => false;
 const expected3 = [];
 console.log(dropIt(nums3, callback3))
+
+
+// ***********************************
+// Tuesday 
+/* 
+    Given in an interview
+    Given a string
+    return whether or not it's possible to make a palindrome out of the string's characters
+    What is it about a string that makes it possible for it to be a palindrome?
+*/
+
+function canStringBecomePalindrome(str){
+    // create table
+    let table = {}
+    let letterAppearsOnce = false;
+    for (let i = 0; i < str.length; i++) {
+        if (table.hasOwnProperty(str[i])) {table[str[i]]++;}
+        else { table[str[i]] = 1; }
+    }
+    if (str.length % 2 == 0){ //even
+        for (key in table) {
+            if (table[key] == 1){
+                return false
+            }
+        }
+    }
+    else { // odd
+        for (key in table) {
+            if (table[key] == 1 && letterAppearsOnce == false){
+                letterAppearsOnce = true;
+            }
+            else if(table[key] == 1 && letterAppearsOnce == true ) {
+                return false
+            }
+        }   
+    }
+    return true;
+}
+
+const str4 = "dda";
+const expected4 = true;
+// Explanation: "dad"
+console.log(canStringBecomePalindrome(str4))
+
+const str5 = "aaadd";
+const expected5 = true;
+// Explanation: "daaad"
+console.log(canStringBecomePalindrome(str5))
+
+const str6 = "abc";
+const expected6 = false;
+console.log(canStringBecomePalindrome(str6))
