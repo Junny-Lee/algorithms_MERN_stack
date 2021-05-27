@@ -132,3 +132,46 @@ console.log(canStringBecomePalindrome(str5))
 const str6 = "abc";
 const expected6 = false;
 console.log(canStringBecomePalindrome(str6))
+
+// ***********************************
+// Thursday
+/* 
+    Given two strings S and T containing only lowercase letters and "#" characters,
+    return if they are equal when both are typed into empty text editors.
+    # character means a backspace character.
+    i.e., after processing the backspaces, are the two strings equal?
+    Bonus: solve in O(n) time
+*/
+function backspaceStringCompare(S, T){
+    let newS = "";
+    let newT = "";
+    for (let i = 0 ; i < S.length; i++){
+        if (S[i] != "#") {newS = newS + S[i]}
+        else {newS = newS.slice(0, newS.length-1)}
+    }
+    for (let i = 0 ; i < T.length; i++){
+        if (T[i] != "#") {newT = newT + T[i]}
+        else {newT = newT.slice(0, newT.length-1)}
+    }
+    return (newS == newT)
+}
+
+const S1 = "ab#c";
+const T1 = "ad#c";
+const expected1 = true;
+console.log(backspaceStringCompare(S1,T1));
+
+const S2 = "ab##";
+const T2 = "c#d#";
+const expected2 = true;
+console.log(backspaceStringCompare(S2,T2));
+
+const S3 = "a##c";
+const T3 = "#a#c";
+const expected3 = true;
+console.log(backspaceStringCompare(S3,T3));
+
+const S4 = "a#c";
+const T4 = "b";
+const expected4 = false;
+console.log(backspaceStringCompare(S4,T4));
