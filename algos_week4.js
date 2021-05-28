@@ -193,15 +193,16 @@ console.log(backspaceStringCompare(S4,T4));
     Bonus, solve without .split
 */
 function compareVersionNumbers(v1, v2) {
-    let splitV1 = v1.split(".");
-    let splitV2 = v2.split(".");
+    let splitV1 = v1.split("."); //
+    let splitV2 = v2.split("."); //
     
     let i = 0;
-    while (splitV1[i] == splitV2[i]){
+    while (parseInt(splitV1[i]) == parseInt(splitV2[i])){ //
         i++;
     }
-    if ( splitV1[i] == undefined || splitV2[i]  == undefined ) {
-        if (splitV1[i] == undefined ) {
+    if ( splitV1[i] == undefined || splitV2[i]  == undefined ) { // compare to length not undefined
+        if (splitV1[i] == undefined && splitV2[i]  == undefined ) {return 0}
+        else if (splitV1[i] == undefined ) {
             return -1;
         } else return 1;
     }
@@ -213,6 +214,13 @@ function compareVersionNumbers(v1, v2) {
         } else return 0
     }
 }
+
+// space = O(n + m) for v1 and v2. still linear
+// time = O(3n). this is ~ O(n) for large data set. if smaller, the relative diff. is greater 
+
+const test6V1 = "1.001.5";
+const test6V2 = "1.1.3";
+console.log(compareVersionNumbers(test6V1, test6V2));
 
 const test1V1 = "0.1";
 const test1V2 = "1.1";
