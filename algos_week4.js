@@ -140,7 +140,7 @@ console.log(canStringBecomePalindrome(str6))
     return if they are equal when both are typed into empty text editors.
     # character means a backspace character.
     i.e., after processing the backspaces, are the two strings equal?
-    Bonus: solve in O(n) time
+    Bonus: solve in O(n) time (can do for loops. one for loop is O(n), two for loops is O(2n))
 */
 function backspaceStringCompare(S, T){
     let newS = "";
@@ -155,6 +155,10 @@ function backspaceStringCompare(S, T){
     }
     return (newS == newT)
 }
+
+// array solution (allows you to use pop instead of slice method)
+
+// dana's solution: space is O(1) & time is O(n)
 
 const S1 = "ab#c";
 const T1 = "ad#c";
@@ -175,3 +179,63 @@ const S4 = "a#c";
 const T4 = "b";
 const expected4 = false;
 console.log(backspaceStringCompare(S4,T4));
+
+// ***********************************
+// Friday
+/* 
+    Given two strings, version1, and version2, both representing version numbers
+    If version1 > version2 return 1; if version1 < version2 return -1; otherwise return 0.
+    Helpful methods:
+        - .split(characterToSplitOn)
+        - returns an array of items: "a-b-c".split("-") returns ["a", "b", "c"]
+        - .parseInt
+        - given a string, converts it to and returns int or NaN (Not a Number) if conversion fails
+    Bonus, solve without .split
+*/
+function compareVersionNumbers(v1, v2) {
+    let splitV1 = v1.split(".");
+    let splitV2 = v2.split(".");
+    
+    let i = 0;
+    while (splitV1[i] == splitV2[i]){
+        i++;
+    }
+    if ( splitV1[i] == undefined || splitV2[i]  == undefined ) {
+        if (splitV1[i] == undefined ) {
+            return -1;
+        } else return 1;
+    }
+    else {
+        if (parseInt(splitV1[i]) > parseInt(splitV2[i])) {
+            return 1;
+        } else if ( parseInt(splitV1[i]) < parseInt(splitV2[i])) {
+            return -1;
+        } else return 0
+    }
+}
+
+const test1V1 = "0.1";
+const test1V2 = "1.1";
+const expected1 = -1;
+console.log(compareVersionNumbers(test1V1, test1V2));
+
+const test2V1 = "1.0.1";
+const test2V2 = "1";
+const expected2 = 1;
+console.log(compareVersionNumbers(test2V1, test2V2)); //
+
+const test3V1 = "7.5.2.4";
+const test3V2 = "7.5.3";
+const expected3 = -1;
+console.log(compareVersionNumbers(test3V1, test3V2));
+
+const test4V1 = "7.5.2.4";
+const test4V2 = "7.5.2";
+const expected4 = 1;
+console.log(compareVersionNumbers(test4V1, test4V2)); //
+
+const test5V1 = "1.01";
+const test5V2 = "1.001";
+const expected5 = 0;
+console.log(compareVersionNumbers(test5V1, test5V2));
+
