@@ -158,6 +158,41 @@ function backspaceStringCompare(S, T){
 
 // array solution (allows you to use pop instead of slice method)
 
+// cody's solution:
+function backspaceStringCompare(S, T) {
+    let finalS = "";
+    let finalT = "";
+    
+    for(let i = S.length - 1; i >=0; i--) {
+        if(S[i] !== "#"){
+            finalS += S[i];
+        } else {
+            let skipCount = 0;
+            while(S[i] === "#"){
+                skipCount++;
+                i--;
+            }
+            i-= skipCount-1;
+        }
+    }
+
+    for(let i = T.length - 1; i >= 0; i--) {
+        if(T[i] !== "#"){
+            finalT += T[i];
+        } else {
+            let skipCount = 0;
+            while(T[i] === "#"){
+                skipCount++;
+                i--;
+            }
+            i-= skipCount-1;
+        }
+    }
+
+    return finalS === finalT;
+}
+
+
 // dana's solution: space is O(1) & time is O(n)
 
 const S1 = "ab#c";
