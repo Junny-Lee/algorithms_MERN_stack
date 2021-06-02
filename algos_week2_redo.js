@@ -7,6 +7,7 @@
 */
 
 function orderedIntersection(sortedA, sortedB){
+    let newArr = [];
 
 }
 
@@ -28,7 +29,7 @@ Venn Diagram Visualization (top) https://i.ytimg.com/vi/sdflTUW6gHo/maxresdefaul
 EXAMPLE:
 */
 function orderedMultiSetUnion(sortedA, sortedB){
-
+    
 }
 
 const sortedA1 = [1, 2, 2, 2, 7];
@@ -57,7 +58,19 @@ console.log(orderedMultiSetUnion(sortedA1, sortedB1))
 
 // my solution, but indexOf is nested for loop
 function symmetricDifference(setA, setB){
+    // let tableA = {};
+    // let tableB = {};
+    // let returnArr = [];
+    // for (let i = 0; i , i < setA.length; i++){
+    //     if (tableA.hasOwnProperty(setA[i])) {tableA[setA[i]]++;}
+    //     else { tableA[setA[i]] = 1; }
+    // }
+    // for (let i = 0; i , i < setB.length; i++){
+    //     if (tableB.hasOwnProperty(setB[i])) {tableB[setB[i]]++;}
+    //     else { tableB[setB[i]] = 1; }
+    // }
 
+    // return returnArr;
 }
 
 // cody's solution: using frequency tables
