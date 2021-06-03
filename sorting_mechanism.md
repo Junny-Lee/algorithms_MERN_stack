@@ -1,5 +1,8 @@
 good resource: https://www.interviewcake.com/sorting-algorithm-cheat-sheet
 
+#  Bubble Sort
+
+
 #  Selection Sort
 Selection sort works by repeatedly "selecting" the next-smallest element from the unsorted array and moving it to the front.
 - beginning array: unsorted
