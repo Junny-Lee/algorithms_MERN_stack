@@ -48,7 +48,6 @@ function bubbleSort(nums){
     return nums; // by the time we get here, it's sorted!
 }
 
-
 var nums1 = [1,7,30,5,9,0,3]
 var expected1 = [0,1,3,5,7,9,30]
 console.log(bubbleSort(nums1))
