@@ -71,6 +71,12 @@ Merge sort works by splitting the input in half, recursively sorting each half, 
     - worst: O(nlogn)
     - best: O(nlogn)
     - average: O(nlogn)
+    # How it works:
+    Code Merge Sort: Merge sort has two parts. Main part does divide or breaks down and second part is merging/combining parts. At the time of combining, parts are combined together.
+
+    Divide: the first function named as mergeSort is actually a divide function. where an array is divided into two.
+
+    merge: this is just merging two sorted array. Just be careful this two array could be in different size
 
 #  QuickSort
 Quicksort works by recursively dividing the input into two smaller arrays around a pivot item: one half has items smaller than the pivot, the other has larger items.
@@ -81,6 +87,31 @@ Quicksort works by recursively dividing the input into two smaller arrays around
     - worst: O(n^2)
     - best: O(nlogn)
     - average: O(nlogn)
+    # How it works:
+    how does it works:
+
+    Step-1: You have to pick a pivot. This could be randomly selected or the middle one. Here we select the last element of the array.
+
+    Step-2: Put all the items smaller than the pivot value to the left and larger than the pivot value to the right.
+
+    Step-3:Repeat the step-2 for both left and right side of the pivot (pick a pivot, put all item smaller than the pivot to the left and larger on the right)
+
+    Explain the code
+    Call Quick sort: Pass the array and pass left and right to the quickSort function. For the first call, left would be the index of the first element which is 0 and right would be the index of the last element which would be length -1.
+
+    Select Pivot: We select pivot as the last index of the array.
+
+    Call Partition function: After calculating the pivot, we send the pivot to the partition function. In the partition function we pass array, pivot index, left and right.
+
+    partitionIndex: In the partition function, we keep move all the items smaller than the pivot value to the left and larger than pivot value to the right. We have to keep track of the position of the partition. so that we can split the array into two parts in the next step. This tracking of the index where we partition the array is done by using partitionIndex variable. the initial value is left.
+
+    Swap function: This is just a helper function to swap values of the array.
+
+    move elements: we start a for loop from the left, and if the values is smaller than the pivot values we swap it with the position of the partitionIndex and increase the value of the partitionIndex. If the value is bigger, we don't do anything. We keep going until the element before the last element (remember last element is the pivot)
+
+    place pivot After moving all the smallest element to the left, we swap the last element (pivot value) with the partitionIndex. By doing this, the pivot sits where it suppose to sit when the full array is sorted. As all elements left to it smaller and all element right to it is bigger. End of the function partition, return the partitionIndex
+
+    Repeat the process: Now come back to quickSort function. when you get the partitionIndex, apply quickSort for the left side of the array and right side of the array. keep doing it until left is smaller than right.
 
 
 
